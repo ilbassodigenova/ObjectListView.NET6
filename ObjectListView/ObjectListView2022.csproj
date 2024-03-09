@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows7.0</TargetFramework>
     <OutputType>Library</OutputType>
     <RootNamespace>BrightIdeasSoftware</RootNamespace>
     <AssemblyName>ObjectListView</AssemblyName>
@@ -17,9 +17,12 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <WarningLevel>1</WarningLevel>
     <DocumentationFile>bin\Debug\ObjectListView.XML</DocumentationFile>
+    <Optimize>True</Optimize>
+    <DebugType>none</DebugType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DocumentationFile>bin\Release\ObjectListView.XML</DocumentationFile>
+    <DebugType>none</DebugType>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="DataTreeListView.cs">
@@ -73,8 +76,5 @@
   <ItemGroup>
     <Compile Remove="Implementation\DragSource.cs" />
     <Compile Remove="Implementation\DropSink.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
   </ItemGroup>
 </Project>

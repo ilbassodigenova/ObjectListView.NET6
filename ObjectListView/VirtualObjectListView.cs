@@ -104,7 +104,7 @@ namespace BrightIdeasSoftware
     /// <para>To enable grouping, you must provide an implementation of IVirtualGroups interface, via the GroupingStrategy property.</para>
     /// <para>Similarly, to enable filtering on the list, your VirtualListDataSource must also implement the IFilterableDataSource interface.</para>
     /// </remarks>
-    public class VirtualObjectListView : ObjectListView
+    public class VirtualObjectListView:ObjectListView
     {
         /// <summary>
         /// Create a VirtualObjectListView
@@ -425,7 +425,7 @@ namespace BrightIdeasSoftware
                 // 
                 if (virtualListSizeFieldInfo == null)
                 {
-                    virtualListSizeFieldInfo = typeof(ListView).GetField("virtualListSize", BindingFlags.NonPublic | BindingFlags.Instance);
+                    virtualListSizeFieldInfo = typeof(ListView).GetField("_virtualListSize", BindingFlags.NonPublic | BindingFlags.Instance);
                     System.Diagnostics.Debug.Assert(virtualListSizeFieldInfo != null);
                 }
 
@@ -538,7 +538,7 @@ namespace BrightIdeasSoftware
         public override void ClearObjects()
         {
             if (this.InvokeRequired)
-                this.Invoke(new MethodInvoker(this.ClearObjects));
+                this.Invoke(new System.Windows.Forms.MethodInvoker(this.ClearObjects));
             else
             {
                 this.CheckStateMap.Clear();
@@ -624,7 +624,7 @@ namespace BrightIdeasSoftware
         {
             if (this.InvokeRequired)
             {
-                this.Invoke((MethodInvoker)delegate { this.RefreshObjects(modelObjects); });
+                this.Invoke((System.Windows.Forms.MethodInvoker)delegate { this.RefreshObjects(modelObjects); });
                 return;
             }
 
@@ -759,7 +759,7 @@ namespace BrightIdeasSoftware
         {
             if (this.InvokeRequired)
             {
-                this.Invoke((MethodInvoker)delegate { this.SetObjects(collection, preserveState); });
+                this.Invoke((System.Windows.Forms.MethodInvoker)delegate { this.SetObjects(collection, preserveState); });
                 return;
             }
 
