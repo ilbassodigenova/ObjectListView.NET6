@@ -1,4 +1,4 @@
-﻿/*
+/*
  * DataTreeListView - A data bindable TreeListView
  *
  * Author: Phillip Piper
@@ -61,7 +61,7 @@ namespace BrightIdeasSoftware
     /// </para>
     /// <para>Like a TreeListView, the hierarchy must not contain cycles. Bad things will happen if the data is cyclic.</para>
     /// </remarks>
-    public partial class DataTreeListView : TreeListView
+    public partial class DataTreeListView : TreeListView, IDisposable
     {
         #region Public Properties
 
@@ -236,5 +236,12 @@ namespace BrightIdeasSoftware
         private TreeDataSourceAdapter adapter;
 
         #endregion
+
+        public new void Dispose()
+        {
+            base.Dispose ();
+            adapter?.Dispose ();
+            
+        }
     }
 }

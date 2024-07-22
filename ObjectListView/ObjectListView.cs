@@ -708,6 +708,7 @@ namespace BrightIdeasSoftware
             this.glassPanels.Clear();
 
             this.UnsubscribeNotifications(null);
+            selectedColumnDecoration?.Dispose ();
         }
 
         #endregion
@@ -11637,7 +11638,7 @@ namespace BrightIdeasSoftware
 
         private bool ShouldShowOverlays()
         {
-            // If we are in design mode, we don’t show the overlays
+            // If we are in design mode, we donâ€™t show the overlays
             if (this.DesignMode)
                 return false;
 

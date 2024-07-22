@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Adornments - Adornments are the basis for overlays and decorations -- things that can be rendered over the top of a ListView
  *
  * Author: Phillip Piper
@@ -428,7 +428,7 @@ namespace BrightIdeasSoftware
     /// <summary>
     /// An adornment that will draw text
     /// </summary>
-    public class TextAdornment : GraphicAdornment
+    public class TextAdornment : GraphicAdornment, IDisposable
     {
         #region Public properties
 
@@ -734,6 +734,11 @@ namespace BrightIdeasSoftware
             }
 
             return path;
+        }
+
+        public void Dispose ()
+        {
+            stringFormat?.Dispose ();
         }
 
         #endregion

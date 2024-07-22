@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Decorations - Images, text or other things that can be rendered onto an ObjectListView
  *
  * Author: Phillip Piper
@@ -252,7 +252,7 @@ namespace BrightIdeasSoftware
     /// column in the listview will be used.
     /// The selected column is normally the sort column, but does not have to be.
     /// </summary>
-    public class TintedColumnDecoration : ColumnDecoration {
+    public class TintedColumnDecoration : ColumnDecoration, IDisposable {
         #region Constructors
 
         /// <summary>
@@ -302,6 +302,11 @@ namespace BrightIdeasSoftware
 
         public override void DrawDecoration(ObjectListView olv, Graphics g, Rectangle r, Rectangle columnBounds) {
             g.FillRectangle(this.tintBrush, columnBounds);
+        }
+
+        public void Dispose ()
+        {
+            tintBrush?.Dispose ();
         }
 
         #endregion
@@ -392,7 +397,7 @@ namespace BrightIdeasSoftware
     /// This decoration draws an optionally filled border around a rectangle.
     /// Subclasses must override CalculateBounds().
     /// </summary>
-    public class BorderDecoration : AbstractDecoration
+    public class BorderDecoration : AbstractDecoration, IDisposable
     {
         #region Constructors
 
@@ -568,6 +573,11 @@ namespace BrightIdeasSoftware
             }
 
             return path;
+        }
+
+        public void Dispose ()
+        {
+            fillBrush?.Dispose ();
         }
 
         #endregion

@@ -2338,8 +2338,8 @@ namespace BrightIdeasSoftware {
 
         #region Private variables
 
-        private Hashtable map; // Track the association between values and images
-        private Object nullImage; // image to be drawn for null values (since null can't be a key)
+        private readonly Hashtable map; // Track the association between values and images
+        private object nullImage; // image to be drawn for null values (since null can't be a key)
 
         #endregion
     }
@@ -2441,6 +2441,7 @@ namespace BrightIdeasSoftware {
         /// </summary>
         protected override void Dispose(bool disposing) {
             Paused = true;
+            tickler?.Dispose ();
             base.Dispose(disposing);
         }
 
@@ -2782,7 +2783,7 @@ namespace BrightIdeasSoftware {
         #region Private variables
 
         private System.Threading.Timer tickler; // timer used to tickle the animations
-        private Stopwatch stopwatch; // clock used to time the animation frame changes
+        private readonly Stopwatch stopwatch; // clock used to time the animation frame changes
 
         #endregion
     }
@@ -3388,8 +3389,8 @@ namespace BrightIdeasSoftware {
             }
         }
 
-        private List<Int32> keysInOrder = new List<Int32>();
-        private Dictionary<Int32, Object> imageMap = new Dictionary<Int32, object>();
+        private readonly List<Int32> keysInOrder = new List<Int32>();
+        private readonly Dictionary<Int32, Object> imageMap = new Dictionary<Int32, object>();
     }
 
     /// <summary>
@@ -3403,7 +3404,7 @@ namespace BrightIdeasSoftware {
     /// It's not RightToLeft friendly.
     /// </para>
     /// </remarks>
-    public class DescribedTaskRenderer : BaseRenderer, IFilterAwareRenderer
+    public class DescribedTaskRenderer : BaseRenderer, IFilterAwareRenderer, IDisposable
     {
         private readonly StringFormat noWrapStringFormat;
         private readonly HighlightTextRenderer highlightTextRenderer = new HighlightTextRenderer();
@@ -3420,6 +3421,13 @@ namespace BrightIdeasSoftware {
         }
 
         #region Configuration properties
+
+        public new void Dispose()
+        {
+            base.Dispose ();
+            noWrapStringFormat?.Dispose ();
+            highlightTextRenderer?.Dispose ();
+        }
 
         /// <summary>
         /// Should text be rendered using GDI routines? This makes the text look more
@@ -3536,7 +3544,7 @@ namespace BrightIdeasSoftware {
                 return this.DescriptionColor.IsEmpty ? defaultDescriptionColor : this.DescriptionColor;
             }
         }
-        private static Color defaultDescriptionColor = Color.FromArgb(45, 46, 49);
+        private readonly static Color defaultDescriptionColor = Color.FromArgb(45, 46, 49);
 
         /// <summary>
         /// Gets or sets the number of pixels that will be left between the image and the text

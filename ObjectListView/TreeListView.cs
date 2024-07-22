@@ -181,7 +181,7 @@ namespace BrightIdeasSoftware
     /// each model object must appear only once in the tree. If the same model object appears in two
     /// places in the tree, the control will become confused.</para>
     /// </remarks>
-    public partial class TreeListView : VirtualObjectListView
+    public partial class TreeListView : VirtualObjectListView, IDisposable
     {
         /// <summary>
         /// Make a default TreeListView
@@ -199,6 +199,12 @@ namespace BrightIdeasSoftware
             // This improves hit detection even if we don't have any state image
             this.SmallImageList = new ImageList();
            // this.StateImageList.ImageSize = new Size(6, 6);
+        }
+
+        public new void Dispose()
+        {
+            base.Dispose ();
+            treeRenderer?.Dispose ();
         }
 
         //------------------------------------------------------------------------------------------
@@ -2236,7 +2242,7 @@ namespace BrightIdeasSoftware
         /// <summary>
         /// Get whether this this model can be expanded? If true, an expand glyph will be drawn next to it.
         /// </summary>
-        /// <remarks>This is called often! It must be fast. Don’t do a database lookup, calculate pi, or do linear searches – just return a property value.</remarks>
+        /// <remarks>This is called often! It must be fast. Donâ€™t do a database lookup, calculate pi, or do linear searches â€“ just return a property value.</remarks>
         bool TreeCanExpand { get; }
 
         /// <summary>

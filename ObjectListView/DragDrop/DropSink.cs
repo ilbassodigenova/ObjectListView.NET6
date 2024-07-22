@@ -286,7 +286,7 @@ namespace BrightIdeasSoftware
     /// <remarks>
     /// Actually, it should be called CleverDropSink -- it's far from simple and can do quite a lot in its own right.
     /// </remarks>
-    public class SimpleDropSink : AbstractDropSink
+    public class SimpleDropSink : AbstractDropSink, IDisposable
     {
         #region Life and death
 
@@ -1218,9 +1218,15 @@ namespace BrightIdeasSoftware
             };
         }
 
+        public void Dispose ()
+        {
+            billboard?.Dispose ();
+            timer?.Dispose ();
+        }
+
         #endregion
 
-        private Timer timer;
+        private readonly Timer timer;
         private int scrollAmount;
         private bool originalFullRowSelect;
         private ModelDropEventArgs dropEventArgs;
@@ -1519,7 +1525,7 @@ namespace BrightIdeasSoftware
             }
         }
         private IList dragModels;
-        private ArrayList toBeRefreshed = new ArrayList();
+        private readonly ArrayList toBeRefreshed = new ArrayList();
 
         /// <summary>
         /// Gets the ObjectListView that is the source of the dragged objects.
