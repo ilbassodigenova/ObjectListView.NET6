@@ -15,3 +15,10 @@
 /Tests/obj/Debug
 /ListViewPrinterDemo/bin/Debug
 /Tests/bin/Debug
+
+/Demo/obj/**
+/ListViewPrinter/obj/**
+/ListViewPrinterDemo/obj/**
+/ObjectListView/obj/**
+/Tests/obj/**
+/SparkleLibrary/obj/**
